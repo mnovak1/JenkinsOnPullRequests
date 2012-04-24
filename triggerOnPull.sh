@@ -25,7 +25,7 @@ do
         if [[ -z "$minOpenPull" ]]; then
             echo "setting minOpenPull to $number"
             minOpenPull=$number
-        elif [[ "$number" -lt "$minOpenPull"]]; then
+        elif [ "$number" -lt "$minOpenPull"]; then
             minOpenPull=$number
         fi
     fi
