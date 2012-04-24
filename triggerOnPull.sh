@@ -34,6 +34,10 @@ done
 if [[ -z "$minOpenPull" ]]; then
     exit 1
 elif [[ "$minOpenPull" -gt "$lastPullNumber" ]]; then
+    if [[ $1 == "--patch" ]]; then
+        pwd
+        git log -1
+    fi
     exit 0
 fi
 
