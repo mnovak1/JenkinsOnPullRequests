@@ -4,11 +4,15 @@ Scripts to run a Jenkins CI build against every open pull request of a GitHub pr
 
 ## Requirements
 
+The scripts require your Jenkins environment to have the following installed:
+- bash
+- curl
+
 It requires the following Jenkins plugins:
 - Description Setter https://wiki.jenkins-ci.org/display/JENKINS/Description+Setter+Plugin
 - XTrigger http://wiki.jenkins-ci.org/display/JENKINS/XTrigger+Plugin
 
-It obviously also requires Git and GitHub plugins at Jenkins. It also uses shell-scripts, so your Jenkins environment better have access to bash.
+It obviously also requires Git and GitHub plugins at Jenkins.
 
 ## Instructions
 
