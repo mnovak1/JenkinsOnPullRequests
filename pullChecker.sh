@@ -1,24 +1,23 @@
 #! /bin/bash
 
-# Build Name Setter plugin
-
-JENKINS_JOB_URL=http://localhost:8080/job/githubPULLS/
-
 # GitHub pull numbers start with 1 ;-)
 # setting to 0 also not a problem because we only consider 'open' pulls
 lastPullNumber=0
 
-lastJenkinsRunData=`curl --silent --fail $JENKINS_JOB_URL/lastBuild/api/xml?xpath=//shortDescription`
+echo Using JOB_URL=$JOB_URL
+
+# Get the description of the last build (empty string if none)
+lastJenkinsRunData=`curl --silent --fail $JOB_URL/lastBuild/api/xml?xpath=//shortDescription`
 echo Last Jenkins run description: $lastJenkinsRunData
 
-if [[ $lastJenkinsRunData =~ *GitHub-Pull=[0-9]*  ]]; then
+# Get a number from the last description if any
+if [[ $lastJenkinsRunData =~ *PullNumber=[0-9]*  ]]; then
     echo GitHub pull matches!
     lastPullNumber=`echo $lastJenkinsRunData | cut -f 2 -d '=' | cur -f 1 -d '<'`
 fi
 
-exit 0
-
-curl --silent https://api.github.com/repos/hornetq/hornetq/pulls | while read line
+# Get all open pull-requests from GitHub
+curl --silent https://api.github.com/repos/$GITHUB_USER_PROJECT/pulls | while read line
 do
     content=`echo $line | tr -s " "`
     if [[ $content =~ \"number\"\: ]]; then

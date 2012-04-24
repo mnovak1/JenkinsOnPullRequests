@@ -12,8 +12,15 @@ It obviously also requires Git and GitHub plugins at Jenkins. It also uses shell
 
 ## Instructions
 
-1. Enable ```[ScriptTrigger] - Poll with a shell or batch script``` and use the contents of ```pullChecker.sh```. Set a suitable checking period.
+0. Enable ```Prepare an environment for the run``` and add your project's URL to ```Properties Content```:
 
-2. Enable ```Set build description```, using ```GitHub-Pull=[0-9]*``` for regular expression.
+```
+GITHUB_USER_PROJECT=FranciscoBorges/JenkinsOnPullRequests
+GITHUB_PROJECT_URL=https://github.com/FranciscoBorges/JenkinsOnPullRequests
+```
+
+1. Enable ```[ScriptTrigger] - Poll with a shell or batch script``` and use the contents of ```pullChecker.sh```. Set a suitable checking period (e.g. ```*/5 * * * *```).
+
+2. Enable ```Set build description```, using ```PullNumber=[0-9]*``` for regular expression.
 
 
